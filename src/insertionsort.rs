@@ -1,8 +1,8 @@
-use crate::Sorter;
+use crate::StableSorter;
 
 pub struct InsertionSort;
 
-impl Sorter for InsertionSort {
+impl StableSorter for InsertionSort {
     fn sort<T>(slice: &mut [T])
     where
         T: std::cmp::Ord,

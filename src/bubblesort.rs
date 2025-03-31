@@ -1,8 +1,8 @@
-use crate::Sorter;
+use crate::StableSorter;
 
 pub struct BubbleSort;
 
-impl Sorter for BubbleSort {
+impl StableSorter for BubbleSort {
     fn sort<T>(slice: &mut [T])
     where
         T: std::cmp::Ord,

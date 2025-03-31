@@ -4,15 +4,21 @@ mod insertionsort;
 pub use bubblesort::BubbleSort;
 pub use insertionsort::InsertionSort;
 
-pub trait Sorter {
+pub trait StableSorter {
     fn sort<T>(slice: &mut [T])
+    where
+        T: std::cmp::Ord;
+}
+
+pub trait UnstableSorter {
+    fn sort_unstable<T>(slice: &mut [T])
     where
         T: std::cmp::Ord;
 }
 
 pub struct StdSorter;
 
-impl Sorter for StdSorter {
+impl StableSorter for StdSorter {
     fn sort<T>(slice: &mut [T])
     where
         T: std::cmp::Ord,
@@ -21,10 +27,8 @@ impl Sorter for StdSorter {
     }
 }
 
-pub struct StdUnstableSorter;
-
-impl Sorter for StdUnstableSorter {
-    fn sort<T>(slice: &mut [T])
+impl UnstableSorter for StdSorter {
+    fn sort_unstable<T>(slice: &mut [T])
     where
         T: std::cmp::Ord,
     {
@@ -38,7 +42,7 @@ mod tests {
     use quickcheck::quickcheck;
 
     quickcheck! {
-        fn std_works(slice: Vec<u32>) -> bool {
+        fn stable_std_works(slice: Vec<u32>) -> bool {
             let mut slice =  slice;
             StdSorter::sort(&mut slice);
 
@@ -47,9 +51,9 @@ mod tests {
     }
 
     quickcheck! {
-        fn std_unstable_works(slice: Vec<u32>) -> bool {
+        fn unstable_std_works(slice: Vec<u32>) -> bool {
             let mut slice =  slice;
-            StdUnstableSorter::sort(&mut slice);
+            StdSorter::sort_unstable(&mut slice);
 
             slice.is_sorted()
         }
