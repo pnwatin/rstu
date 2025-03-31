@@ -11,17 +11,19 @@ impl StableSorter for BubbleSort {
             return;
         }
 
-        let mut swapped = true;
+        let mut n = slice.len();
 
-        while swapped {
-            swapped = false;
+        while n > 1 {
+            let mut new_n = 0;
 
-            for i in 1..slice.len() {
+            for i in 1..n {
                 if slice[i] < slice[i - 1] {
                     slice.swap(i, i - 1);
-                    swapped = true;
+                    new_n = i;
                 }
             }
+
+            n = new_n;
         }
     }
 }
