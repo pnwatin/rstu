@@ -1,6 +1,8 @@
 mod bubblesort;
+mod insertionsort;
 
 pub use bubblesort::BubbleSort;
+pub use insertionsort::InsertionSort;
 
 pub trait Sorter {
     fn sort<T>(slice: &mut [T])
