@@ -1,8 +1,10 @@
 mod bubblesort;
 mod insertionsort;
+mod quicksort;
 
 pub use bubblesort::BubbleSort;
 pub use insertionsort::InsertionSort;
+pub use quicksort::QuickSort;
 
 pub trait StableSorter {
     fn sort<T>(slice: &mut [T])
