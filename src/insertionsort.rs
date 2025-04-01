@@ -2,11 +2,11 @@ use crate::StableSorter;
 
 pub struct InsertionSort;
 
-impl StableSorter for InsertionSort {
-    fn sort<T>(slice: &mut [T])
-    where
-        T: std::cmp::Ord,
-    {
+impl<T> StableSorter<T> for InsertionSort
+where
+    T: std::cmp::Ord,
+{
+    fn sort(slice: &mut [T]) {
         if slice.len() < 2 {
             return;
         }

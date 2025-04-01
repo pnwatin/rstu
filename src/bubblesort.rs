@@ -2,11 +2,11 @@ use crate::StableSorter;
 
 pub struct BubbleSort;
 
-impl StableSorter for BubbleSort {
-    fn sort<T>(slice: &mut [T])
-    where
-        T: std::cmp::Ord,
-    {
+impl<T> StableSorter<T> for BubbleSort
+where
+    T: std::cmp::Ord,
+{
+    fn sort(slice: &mut [T]) {
         if slice.len() < 2 {
             return;
         }

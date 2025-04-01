@@ -42,11 +42,11 @@ where
     quicksort(&mut right[1..]);
 }
 
-impl UnstableSorter for QuickSort {
-    fn sort_unstable<T>(slice: &mut [T])
-    where
-        T: std::cmp::Ord,
-    {
+impl<T> UnstableSorter<T> for QuickSort
+where
+    T: std::cmp::Ord,
+{
+    fn sort_unstable(slice: &mut [T]) {
         quicksort(slice);
     }
 }

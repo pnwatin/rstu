@@ -6,34 +6,36 @@ pub use bubblesort::BubbleSort;
 pub use insertionsort::InsertionSort;
 pub use quicksort::QuickSort;
 
-pub trait StableSorter {
-    fn sort<T>(slice: &mut [T])
-    where
-        T: std::cmp::Ord;
+pub trait StableSorter<T>
+where
+    T: std::cmp::Ord,
+{
+    fn sort(slice: &mut [T]);
 }
 
-pub trait UnstableSorter {
-    fn sort_unstable<T>(slice: &mut [T])
-    where
-        T: std::cmp::Ord;
+pub trait UnstableSorter<T>
+where
+    T: std::cmp::Ord,
+{
+    fn sort_unstable(slice: &mut [T]);
 }
 
 pub struct StdSorter;
 
-impl StableSorter for StdSorter {
-    fn sort<T>(slice: &mut [T])
-    where
-        T: std::cmp::Ord,
-    {
+impl<T> StableSorter<T> for StdSorter
+where
+    T: std::cmp::Ord,
+{
+    fn sort(slice: &mut [T]) {
         slice.sort();
     }
 }
 
-impl UnstableSorter for StdSorter {
-    fn sort_unstable<T>(slice: &mut [T])
-    where
-        T: std::cmp::Ord,
-    {
+impl<T> UnstableSorter<T> for StdSorter
+where
+    T: std::cmp::Ord,
+{
+    fn sort_unstable(slice: &mut [T]) {
         slice.sort_unstable();
     }
 }
