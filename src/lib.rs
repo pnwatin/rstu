@@ -1,10 +1,12 @@
 mod bubblesort;
 mod insertionsort;
 mod quicksort;
+mod selectionsort;
 
 pub use bubblesort::BubbleSort;
 pub use insertionsort::InsertionSort;
 pub use quicksort::QuickSort;
+pub use selectionsort::SelectionSort;
 
 pub trait StableSorter<T>
 where
