@@ -14,7 +14,7 @@ where
         for unsorted in 0..slice.len() - 1 {
             let mut smallest_in_rest = unsorted;
 
-            for i in (unsorted + 1)..slice.len() - 1 {
+            for i in (unsorted + 1)..slice.len() {
                 if slice[i] < slice[smallest_in_rest] {
                     smallest_in_rest = i;
                 }
