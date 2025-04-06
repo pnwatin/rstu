@@ -1,9 +1,11 @@
 mod bubblesort;
+mod heapsort;
 mod insertionsort;
 mod quicksort;
 mod selectionsort;
 
 pub use bubblesort::BubbleSort;
+pub use heapsort::HeapSort;
 pub use insertionsort::InsertionSort;
 pub use quicksort::QuickSort;
 pub use selectionsort::SelectionSort;
