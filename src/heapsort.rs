@@ -6,40 +6,31 @@ fn heapify<T>(slice: &mut [T])
 where
     T: std::cmp::Ord,
 {
-    let end = slice.len();
-
-    for i in (0..(end - 1) / 2 + 1).rev() {
-        sift_down(slice, i, end);
+    for i in (0..slice.len() / 2).rev() {
+        sift_down(slice, i);
     }
 }
 
-fn sift_down<T>(slice: &mut [T], root: usize, end: usize)
+fn sift_down<T>(slice: &mut [T], root: usize)
 where
     T: std::cmp::Ord,
 {
-    let mut root = root;
+    let mut largest = root;
+    let left = 2 * root + 1;
+    let right = left + 1;
+    let n = slice.len();
 
-    loop {
-        let left = 2 * root + 1;
-        let right = left + 1;
+    if left < n && slice[left] > slice[largest] {
+        largest = left;
+    }
 
-        if left >= end {
-            return;
-        }
+    if right < n && slice[right] > slice[largest] {
+        largest = right;
+    }
 
-        let child = if right < end && slice[left] < slice[right] {
-            right
-        } else {
-            left
-        };
-
-        if slice[root] >= slice[child] {
-            return;
-        }
-
-        slice.swap(root, child);
-
-        root = child;
+    if largest != root {
+        slice.swap(largest, root);
+        sift_down(slice, largest);
     }
 }
 
@@ -54,9 +45,9 @@ where
 
         heapify(slice);
 
-        for end in (1..slice.len()).rev() {
-            slice.swap(end, 0);
-            sift_down(slice, 0, end);
+        for unsorted in (0..slice.len()).rev() {
+            slice.swap(0, unsorted);
+            sift_down(&mut slice[..unsorted], 0);
         }
     }
 }
