@@ -30,14 +30,19 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
-    use quickcheck::quickcheck;
+    use crate::tests::{StableChecker, sorter_stable_check};
+    use quickcheck_macros::quickcheck;
 
-    quickcheck! {
-        fn insertion_works(slice: Vec<u32>) -> bool {
-            let mut slice =  slice;
-            InsertionSort::sort(&mut slice);
+    #[quickcheck]
+    fn insertion_works(slice: Vec<u32>) -> bool {
+        let mut slice = slice;
+        InsertionSort::sort(&mut slice);
 
-            slice.is_sorted()
-        }
+        slice.is_sorted()
+    }
+
+    #[quickcheck]
+    fn selection_is_stable(slice: Vec<StableChecker>) -> bool {
+        sorter_stable_check::<InsertionSort>(slice)
     }
 }

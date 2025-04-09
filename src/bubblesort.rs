@@ -31,14 +31,19 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
-    use quickcheck::quickcheck;
+    use crate::tests::{StableChecker, sorter_stable_check};
+    use quickcheck_macros::quickcheck;
 
-    quickcheck! {
-        fn bubble_works(slice: Vec<u32>) -> bool {
-            let mut slice =  slice;
-            BubbleSort::sort(&mut slice);
+    #[quickcheck]
+    fn bubble_works(slice: Vec<u32>) -> bool {
+        let mut slice = slice;
+        BubbleSort::sort(&mut slice);
 
-            slice.is_sorted()
-        }
+        slice.is_sorted()
+    }
+
+    #[quickcheck]
+    fn bubble_is_stable(slice: Vec<StableChecker>) -> bool {
+        sorter_stable_check::<BubbleSort>(slice)
     }
 }

@@ -55,14 +55,13 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
-    use quickcheck::quickcheck;
+    use quickcheck_macros::quickcheck;
 
-    quickcheck! {
-        fn heap_works(slice: Vec<u32>) -> bool {
-            let mut slice =  slice;
-            HeapSort::sort_unstable(&mut slice);
+    #[quickcheck]
+    fn heap_works(slice: Vec<u32>) -> bool {
+        let mut slice = slice;
+        HeapSort::sort_unstable(&mut slice);
 
-            slice.is_sorted()
-        }
+        slice.is_sorted()
     }
 }

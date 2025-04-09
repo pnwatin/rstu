@@ -1,12 +1,12 @@
-use crate::StableSorter;
+use crate::UnstableSorter;
 
 pub struct SelectionSort;
 
-impl<T> StableSorter<T> for SelectionSort
+impl<T> UnstableSorter<T> for SelectionSort
 where
     T: std::cmp::Ord,
 {
-    fn sort(slice: &mut [T]) {
+    fn sort_unstable(slice: &mut [T]) {
         if slice.len() < 2 {
             return;
         }
@@ -30,14 +30,13 @@ where
 #[cfg(test)]
 mod tests {
     use super::*;
-    use quickcheck::quickcheck;
+    use quickcheck_macros::quickcheck;
 
-    quickcheck! {
-        fn selection_works(slice: Vec<u32>) -> bool {
-            let mut slice =  slice;
-            SelectionSort::sort(&mut slice);
+    #[quickcheck]
+    fn selection_works(slice: Vec<u32>) -> bool {
+        let mut slice = slice;
+        SelectionSort::sort_unstable(&mut slice);
 
-            slice.is_sorted()
-        }
+        slice.is_sorted()
     }
 }
