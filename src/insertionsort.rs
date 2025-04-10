@@ -42,7 +42,7 @@ mod tests {
     }
 
     #[quickcheck]
-    fn selection_is_stable(slice: Vec<StableChecker>) -> bool {
+    fn insertion_is_stable(slice: Vec<StableChecker>) -> bool {
         sorter_stable_check::<InsertionSort>(slice)
     }
 }

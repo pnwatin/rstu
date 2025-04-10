@@ -1,12 +1,14 @@
 mod bubblesort;
 mod heapsort;
 mod insertionsort;
+mod mergesort;
 mod quicksort;
 mod selectionsort;
 
 pub use bubblesort::BubbleSort;
 pub use heapsort::HeapSort;
 pub use insertionsort::InsertionSort;
+pub use mergesort::MergeSort;
 pub use quicksort::QuickSort;
 pub use selectionsort::SelectionSort;
 
@@ -99,7 +101,7 @@ pub mod tests {
         slice.is_sorted()
     }
 
-    #[derive(Clone, Debug)]
+    #[derive(Clone, Debug, Copy)]
     pub struct StableChecker {
         id: u32,
         key: u8,
