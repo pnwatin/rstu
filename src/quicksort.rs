@@ -1,6 +1,8 @@
-use crate::UnstableSorter;
+use crate::{InsertionSort, StableSorter, UnstableSorter};
 
 pub struct QuickSort;
+
+const MAX_LEN_INSERTION_SORT: usize = 20;
 
 fn quicksort<T>(slice: &mut [T])
 where
@@ -9,6 +11,14 @@ where
     if slice.len() < 2 {
         return;
     }
+
+    if slice.len() <= MAX_LEN_INSERTION_SORT {
+        InsertionSort::sort(slice);
+        return;
+    }
+
+    let mid = slice.len() / 2;
+    slice.swap(0, mid);
 
     let (pivot, rest) = slice.split_first_mut().expect("slice should be non empty");
 
