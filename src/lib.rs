@@ -89,9 +89,8 @@ pub mod tests {
 
         S::sort(&mut slice);
 
-        for i in 0..slice.len() - 1 {
-            let curr = &slice[i];
-            let next = &slice[i + 1];
+        for w in slice.windows(2) {
+            let [curr, next] = w else { unreachable!() };
 
             if curr.key == next.key && curr.id > next.id {
                 return false;
