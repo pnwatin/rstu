@@ -12,16 +12,11 @@ where
         }
 
         for unsorted in 1..slice.len() {
-            if slice[unsorted] >= slice[unsorted - 1] {
-                continue;
-            }
+            let mut i = unsorted;
 
-            for i in 0..unsorted {
-                if slice[unsorted] < slice[i] {
-                    slice[i..=unsorted].rotate_right(1);
-
-                    break;
-                }
+            while i > 0 && slice[i] < slice[i - 1] {
+                slice.swap(i, i - 1);
+                i -= 1;
             }
         }
     }
